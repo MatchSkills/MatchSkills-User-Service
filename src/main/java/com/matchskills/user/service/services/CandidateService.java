@@ -1,6 +1,5 @@
 package com.matchskills.user.service.services;
 
-import com.matchskills.user.service.domains.CandidateDomain;
 import com.matchskills.user.service.dtos.CandidateResponse;
 import com.matchskills.user.service.dtos.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.EditCandidateResponse;
@@ -8,11 +7,7 @@ import com.matchskills.user.service.entitys.CandidateEntity;
 import com.matchskills.user.service.exceptions.customs.CandidateAlreadyExistsException;
 import com.matchskills.user.service.exceptions.customs.CandidateNotFoundException;
 import com.matchskills.user.service.repositorys.CandidateRepository;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 @Service
 public class CandidateService {
