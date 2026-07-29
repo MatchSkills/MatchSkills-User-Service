@@ -1,0 +1,9 @@
+CREATE TABLE candidates (
+
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    number VARCHAR(50) NOT NULL
+
+);
