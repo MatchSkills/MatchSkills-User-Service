@@ -1,8 +1,7 @@
-package com.matchskills.user.service.dtos;
+package com.matchskills.user.service.dtos.candidate;
 
 import com.matchskills.user.service.entitys.CandidateEntity;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.matchskills.user.service.dtos;
+package com.matchskills.user.service.dtos.candidate;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.matchskills.user.service.exceptions.handlers;
 
 import com.matchskills.user.service.exceptions.CustomErrorResponse;
-import com.matchskills.user.service.exceptions.customs.CandidateAlreadyExistsException;
-import com.matchskills.user.service.exceptions.customs.CandidateNotFoundException;
+import com.matchskills.user.service.exceptions.customs.candidate.CandidateAlreadyExistsException;
+import com.matchskills.user.service.exceptions.customs.candidate.CandidateNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

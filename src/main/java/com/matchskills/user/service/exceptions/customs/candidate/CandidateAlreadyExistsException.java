@@ -1,4 +1,4 @@
-package com.matchskills.user.service.exceptions.customs;
+package com.matchskills.user.service.exceptions.customs.candidate;
 
 public class CandidateAlreadyExistsException extends RuntimeException {
     public CandidateAlreadyExistsException() {

@@ -1,11 +1,11 @@
 package com.matchskills.user.service.services;
 
-import com.matchskills.user.service.dtos.CandidateResponse;
-import com.matchskills.user.service.dtos.CreateCandidateRequest;
-import com.matchskills.user.service.dtos.EditCandidateResponse;
+import com.matchskills.user.service.dtos.candidate.CandidateResponse;
+import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
+import com.matchskills.user.service.dtos.candidate.EditCandidateResponse;
 import com.matchskills.user.service.entitys.CandidateEntity;
-import com.matchskills.user.service.exceptions.customs.CandidateAlreadyExistsException;
-import com.matchskills.user.service.exceptions.customs.CandidateNotFoundException;
+import com.matchskills.user.service.exceptions.customs.candidate.CandidateAlreadyExistsException;
+import com.matchskills.user.service.exceptions.customs.candidate.CandidateNotFoundException;
 import com.matchskills.user.service.repositorys.CandidateRepository;
 import org.springframework.stereotype.Service;
 

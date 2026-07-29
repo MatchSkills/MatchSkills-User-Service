@@ -1,15 +1,13 @@
 package com.matchskills.user.service.domains;
 
-import com.matchskills.user.service.dtos.CandidateResponse;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.matchskills.user.service.dtos.candidate.CandidateResponse;
+import lombok.*;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
+@Data
 public class CandidateDomain {
 
     private Long id;

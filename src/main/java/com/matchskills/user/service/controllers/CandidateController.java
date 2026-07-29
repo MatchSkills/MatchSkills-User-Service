@@ -1,8 +1,8 @@
 package com.matchskills.user.service.controllers;
 
-import com.matchskills.user.service.dtos.CandidateResponse;
-import com.matchskills.user.service.dtos.CreateCandidateRequest;
-import com.matchskills.user.service.dtos.EditCandidateResponse;
+import com.matchskills.user.service.dtos.candidate.CandidateResponse;
+import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
+import com.matchskills.user.service.dtos.candidate.EditCandidateResponse;
 import com.matchskills.user.service.services.CandidateService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
