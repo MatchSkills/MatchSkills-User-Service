@@ -73,6 +73,8 @@ public class CandidateService {
             throw new CandidateNotFoundException();
         }
 
+        //TODO delete all jobApplication
+
         candidateRepository.deleteById(id);
 
     }

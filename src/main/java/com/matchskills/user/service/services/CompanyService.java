@@ -35,6 +35,8 @@ public class CompanyService {
             throw new CompanyAlreadyExistsException();
         }
 
+        //TODO put a password encrypt when auth exists
+
         var newCompany = CompanyEntity.builder()
                 .name(createCompanyRequest.getName())
                 .cnpj(createCompanyRequest.getCnpj())
@@ -71,6 +73,8 @@ public class CompanyService {
         if (!existsCompany) {
             throw new CompanyNotFoundException();
         }
+
+        //TODO delete all jobposting
 
         companyRepository.deleteById(id);
 
