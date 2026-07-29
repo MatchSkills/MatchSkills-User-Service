@@ -27,7 +27,7 @@ public class CandidateService {
 
     }
 
-    public void createCandidate(CreateCandidateRequest candidateRequest){
+    public CandidateResponse createCandidate(CreateCandidateRequest candidateRequest){
 
         var alreadyExists = candidateRepository.existsByEmail(candidateRequest.getEmail());
 
@@ -44,7 +44,9 @@ public class CandidateService {
                 .number(candidateRequest.getNumber())
                 .build();
 
-        candidateRepository.save(newCandidate);
+        var savedCandidate = candidateRepository.save(newCandidate);
+
+        return savedCandidate.toCandidateDomain().toCandidateResponse() ;
 
     }
 

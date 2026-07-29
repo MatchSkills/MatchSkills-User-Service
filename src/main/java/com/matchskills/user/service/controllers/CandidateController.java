@@ -26,19 +26,15 @@ public class CandidateController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createCandidate(@Valid @RequestBody CreateCandidateRequest candidate) {
+    public ResponseEntity<CandidateResponse> createCandidate(@Valid @RequestBody CreateCandidateRequest candidate) {
 
-        candidateService.createCandidate(candidate);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(candidateService.createCandidate(candidate));
     }
 
     @PutMapping
-    public ResponseEntity<?> editCandidate(@Valid @RequestBody EditCandidateResponse candidate) {
+    public ResponseEntity<CandidateResponse> editCandidate(@Valid @RequestBody EditCandidateResponse candidate) {
 
-        candidateService.editCandidate(candidate);
-
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(candidateService.editCandidate(candidate));
 
     }
 
