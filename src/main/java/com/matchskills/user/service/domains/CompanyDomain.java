@@ -2,13 +2,19 @@ package com.matchskills.user.service.domains;
 
 import com.matchskills.user.service.dtos.company.CompanyResponse;
 import lombok.*;
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CompanyDomain {
+public class CompanyDomain implements UserDetails {
 
     private Long id;
     private String name;
@@ -20,4 +26,18 @@ public class CompanyDomain {
         return new CompanyResponse(this.id,this.name,this.cnpj,this.email,this.address);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public @Nullable String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
 }
