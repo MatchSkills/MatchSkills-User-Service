@@ -1,12 +1,12 @@
 package com.matchskills.user.service.controllers;
 
 import com.matchskills.user.service.dtos.candidate.CandidateResponse;
-import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.candidate.EditCandidateResponse;
 import com.matchskills.user.service.services.CandidateService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,13 +25,14 @@ public class CandidateController {
         return ResponseEntity.status(HttpStatus.OK).body(candidateService.getCandidate(id));
     }
 
-    @PostMapping
-    public ResponseEntity<CandidateResponse> createCandidate(@Valid @RequestBody CreateCandidateRequest candidate) {
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(candidateService.createCandidate(candidate));
-    }
+//    @PostMapping
+//    public ResponseEntity<CandidateResponse> createCandidate(@Valid @RequestBody CreateCandidateRequest candidate) {
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(candidateService.createCandidate(candidate));
+//    }
 
     @PutMapping
+    @PreAuthorize("hasRole('Candidate')")
     public ResponseEntity<CandidateResponse> editCandidate(@Valid @RequestBody EditCandidateResponse candidate) {
 
         return ResponseEntity.status(HttpStatus.OK).body(candidateService.editCandidate(candidate));
@@ -39,6 +40,7 @@ public class CandidateController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('Candidate')")
     public ResponseEntity<Void> deleteCandidate(@PathVariable Long id) {
 
         candidateService.deleteCandidate(id);

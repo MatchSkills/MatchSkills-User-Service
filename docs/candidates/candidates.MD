@@ -26,6 +26,10 @@ Response body expected:
 
 --- 
 
+# NOT IMPLEMENTED ANYMORE
+
+## Access -> auth endpoint for registrate a Candidate
+
 ### POST `/`
 
 Request body expected:
@@ -61,6 +65,8 @@ Response body expected:
 
 ### PUT `/`
 
+### Only with Candidate Role
+
 Request body expected:
 
    ```
@@ -94,6 +100,7 @@ Response body expected:
 
 ### DELETE `/{id}`
 
+### Only with Candidate Role
 
 #### Returns
 

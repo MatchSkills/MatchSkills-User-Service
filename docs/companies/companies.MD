@@ -27,6 +27,10 @@ Response body expected:
 
 --- 
 
+# NOT IMPLEMENTED ANYMORE
+
+## Access -> auth endpoint for registrate a Company
+
 ### POST `/`
 
 Request body expected:
@@ -64,6 +68,8 @@ Response body expected:
 
 ### PUT `/`
 
+### Only with Company Role
+
 Request body expected:
 
    ```
@@ -98,6 +104,7 @@ Response body expected:
 
 ### DELETE `/{id}`
 
+### Only with Company Role
 
 #### Returns
 

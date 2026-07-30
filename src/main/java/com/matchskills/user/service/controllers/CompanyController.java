@@ -1,12 +1,12 @@
 package com.matchskills.user.service.controllers;
 
 import com.matchskills.user.service.dtos.company.CompanyResponse;
-import com.matchskills.user.service.dtos.company.CreateCompanyRequest;
 import com.matchskills.user.service.dtos.company.EditCompanyRequest;
 import com.matchskills.user.service.services.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,14 +24,15 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getCompany(id));
     }
 
-    @PostMapping
-    public ResponseEntity<CompanyResponse> createCompany(@Valid @RequestBody CreateCompanyRequest createCompanyRequest) {
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.companyService.createCompany(createCompanyRequest));
-
-    }
+//    @PostMapping
+//    public ResponseEntity<CompanyResponse> createCompany(@Valid @RequestBody CreateCompanyRequest createCompanyRequest) {
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(this.companyService.createCompany(createCompanyRequest));
+//
+//    }
 
     @PutMapping
+    @PreAuthorize("hasRole('Company')")
     public ResponseEntity<CompanyResponse> editCompany(@Valid @RequestBody EditCompanyRequest editCompanyRequest) {
 
         return ResponseEntity.status(HttpStatus.OK).body(this.companyService.editCompany(editCompanyRequest));
@@ -39,6 +40,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('Company')")
     public ResponseEntity<CompanyResponse> deleteCompany(@PathVariable Long id) {
 
         companyService.deleteCompany(id);
