@@ -6,7 +6,6 @@ import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.company.CreateCompanyRequest;
 import com.matchskills.user.service.enums.RoleType;
 import com.matchskills.user.service.jwt.JwtService;
-import org.hibernate.mapping.Any;
 import org.springframework.stereotype.Service;
 
 @Service

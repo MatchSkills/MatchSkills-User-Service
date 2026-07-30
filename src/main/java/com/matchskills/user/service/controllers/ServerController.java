@@ -1,6 +1,5 @@
 package com.matchskills.user.service.controllers;
 
-import com.matchskills.user.service.enums.RoleType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
