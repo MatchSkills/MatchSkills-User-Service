@@ -7,15 +7,18 @@ import com.matchskills.user.service.entitys.CompanyEntity;
 import com.matchskills.user.service.exceptions.customs.company.CompanyAlreadyExistsException;
 import com.matchskills.user.service.exceptions.customs.company.CompanyNotFoundException;
 import com.matchskills.user.service.repositorys.CompanyRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CompanyService {
 
     final private CompanyRepository companyRepository;
+    final private PasswordEncoder passwordEncoder;
 
-    public CompanyService(CompanyRepository companyRepository) {
+    public CompanyService(CompanyRepository companyRepository, PasswordEncoder passwordEncoder) {
         this.companyRepository = companyRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public CompanyResponse getCompany(Long id){
@@ -35,13 +38,13 @@ public class CompanyService {
             throw new CompanyAlreadyExistsException();
         }
 
-        //TODO put a password encrypt when auth exists
+        var encriptedPassword = passwordEncoder.encode(createCompanyRequest.getPassword());
 
         var newCompany = CompanyEntity.builder()
                 .name(createCompanyRequest.getName())
                 .cnpj(createCompanyRequest.getCnpj())
                 .email(createCompanyRequest.getEmail())
-                .password(createCompanyRequest.getPassword())
+                .password(encriptedPassword)
                 .address(createCompanyRequest.getAddress())
                 .build();
 

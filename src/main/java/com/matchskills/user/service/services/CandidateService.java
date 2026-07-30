@@ -7,15 +7,18 @@ import com.matchskills.user.service.entitys.CandidateEntity;
 import com.matchskills.user.service.exceptions.customs.candidate.CandidateAlreadyExistsException;
 import com.matchskills.user.service.exceptions.customs.candidate.CandidateNotFoundException;
 import com.matchskills.user.service.repositorys.CandidateRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CandidateService(CandidateRepository candidateRepository) {
+    public CandidateService(CandidateRepository candidateRepository, PasswordEncoder passwordEncoder) {
         this.candidateRepository = candidateRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public CandidateResponse getCandidate(Long id){
@@ -35,12 +38,12 @@ public class CandidateService {
             throw new CandidateAlreadyExistsException();
         }
 
-        //TODO put a password encrypt when auth exists
+        var encriptedPassword = passwordEncoder.encode(candidateRequest.getPassword());
 
         var newCandidate = CandidateEntity.builder()
                 .name(candidateRequest.getName())
                 .email(candidateRequest.getEmail())
-                .password(candidateRequest.getPassword())
+                .password(encriptedPassword)
                 .number(candidateRequest.getNumber())
                 .build();
 

@@ -1,5 +1,6 @@
 package com.matchskills.user.service.configurations;
 
+import com.matchskills.user.service.enums.RoleType;
 import com.matchskills.user.service.exceptions.customs.candidate.CandidateNotFoundException;
 import com.matchskills.user.service.exceptions.customs.company.CompanyNotFoundException;
 import com.matchskills.user.service.exceptions.customs.token.TokenExpiredException;
@@ -54,7 +55,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
                 var tokenDecoded = jwtService.decodeAccessToken(token);
 
-                if (tokenDecoded.getRole().equals("company")) {
+                if (tokenDecoded.getRole().equals(RoleType.Company.name())) {
 
                     var company = companyRepository.findById(tokenDecoded.getUserId())
                             .orElseThrow(CompanyNotFoundException::new);
@@ -65,7 +66,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
                 }
 
-                if (tokenDecoded.getRole().equals("candidate")) {
+                if (tokenDecoded.getRole().equals(RoleType.Candidate.name())) {
 
                     var candidate = candidateRepository.findById(tokenDecoded.getUserId())
                             .orElseThrow(CandidateNotFoundException::new);
