@@ -8,6 +8,8 @@ import com.matchskills.user.service.dtos.candidate.CandidateResponse;
 import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.company.CompanyResponse;
 import com.matchskills.user.service.dtos.company.CreateCompanyRequest;
+import com.matchskills.user.service.dtos.tokens.TokensRequest;
+import com.matchskills.user.service.dtos.tokens.TokensResponse;
 import com.matchskills.user.service.enums.RoleType;
 import com.matchskills.user.service.exceptions.customs.candidate.CandidateNotFoundException;
 import com.matchskills.user.service.exceptions.customs.company.CompanyNotFoundException;
@@ -27,13 +29,15 @@ public class AuthService {
     final private CompanyRepository companyRepository;
     final private JwtService jwtService;
     final private PasswordEncoder passwordEncoder;
+    final private RedisBlackListService redisBlackListService;
 
     public  AuthService(CandidateService candidateService,
                         CandidateRepository candidateRepository,
                         CompanyService companyService,
                         CompanyRepository companyRepository,
                         JwtService jwtService,
-                        PasswordEncoder passwordEncoder
+                        PasswordEncoder passwordEncoder,
+                        RedisBlackListService redisBlackListService
     ) {
         this.candidateService = candidateService;
         this.companyService = companyService;
@@ -41,6 +45,7 @@ public class AuthService {
         this.candidateRepository = candidateRepository;
         this.companyRepository = companyRepository;
         this.passwordEncoder = passwordEncoder;
+        this.redisBlackListService = redisBlackListService;
     }
 
     public CandidateAuthResponse registerCandidate(CreateCandidateRequest createCandidateRequest) {
@@ -94,6 +99,27 @@ public class AuthService {
         var tokens = jwtService.createTokens(targetCompany.getId(), RoleType.Company.name());
 
         return new CompanyAuthResponse(tokens, targetCompany.toCompanyDomain().toCompanyResponse());
+
+    }
+
+    public void logout(TokensRequest tokensRequest){
+
+        redisBlackListService.addAccessToken(jwtService.getTokenId(tokensRequest.getAccessToken()), tokensRequest.getAccessToken());
+        redisBlackListService.addRefreshToken(jwtService.getTokenId(tokensRequest.getRefreshToken()), tokensRequest.getRefreshToken());
+
+    }
+
+    public TokensResponse refresh(String refreshToken){
+
+        refreshToken = jwtService.getToken(refreshToken);
+
+        redisBlackListService.verifyIfBlacklisted(jwtService.getTokenId(refreshToken));
+
+        redisBlackListService.addRefreshToken(jwtService.getTokenId(refreshToken), refreshToken);
+
+        var tokenDecoded = jwtService.decodeRefreshToken(refreshToken);
+
+        return jwtService.createTokens(tokenDecoded.getUserId(),tokenDecoded.getRole());
 
     }
 

@@ -143,4 +143,14 @@ public class JwtService {
 
     }
 
+    public String getToken(String rawToken){
+
+        if (!rawToken.startsWith("Bearer ")){
+            throw new TokenInvalidException();
+        }
+
+        return rawToken.replace("Bearer ", "");
+
+    }
+
 }

@@ -152,3 +152,48 @@ Response body expected:
 * `200 - OK` - Sucess.
 * `400 - BAD REQUEST` - Invalid parameters(null parameters, size invalid).
 * `404 - NOT FOUND` - Invalid email or password or candidate dont exists.
+
+---
+
+### POST `/logout`
+
+Header expected:
+
+``Authentication: Bearer <Access Token>``
+
+Request body expected:
+
+   ```
+   {
+    "refreshToken": String
+    }
+   ```
+
+#### Returns
+
+* `200 - OK` - Sucess.
+* `400 - BAD REQUEST` - Invalid format
+* `401 - UNAUTHORIZED` - Invalid jwt.
+
+---
+
+### POST `/refresh`
+
+Header expected:
+
+``Authentication: Bearer <Access Token>``
+
+Response body expected:
+
+   ```
+   {
+    "accessToken": String
+    "refreshToken": String
+    }
+   ```
+
+#### Returns
+
+* `200 - OK` - Sucess.
+* `400 - BAD REQUEST` - Invalid format
+* `401 - UNAUTHORIZED` - Invalid jwt.

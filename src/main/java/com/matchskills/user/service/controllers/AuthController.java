@@ -1,11 +1,10 @@
 package com.matchskills.user.service.controllers;
 
-import com.matchskills.user.service.dtos.auth.CandidateAuthResponse;
-import com.matchskills.user.service.dtos.auth.CandidateLoginRequest;
-import com.matchskills.user.service.dtos.auth.CompanyAuthResponse;
-import com.matchskills.user.service.dtos.auth.CompanyLoginRequest;
+import com.matchskills.user.service.dtos.auth.*;
 import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.company.CreateCompanyRequest;
+import com.matchskills.user.service.dtos.tokens.TokensRequest;
+import com.matchskills.user.service.dtos.tokens.TokensResponse;
 import com.matchskills.user.service.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -44,10 +43,25 @@ public class AuthController {
     }
 
     @PostMapping("/login/company")
-    public  ResponseEntity<CompanyAuthResponse> loginCompany(@Valid @RequestBody CompanyLoginRequest companyLoginRequest) {
+    public ResponseEntity<CompanyAuthResponse> loginCompany(@Valid @RequestBody CompanyLoginRequest companyLoginRequest) {
 
         return ResponseEntity.status(HttpStatus.OK).body(authService.loginCompany(companyLoginRequest));
 
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@Valid @RequestHeader("Authorization") String accesstoken, @RequestBody LogoutRequest refreshToken){
+
+        authService.logout(new TokensRequest(accesstoken,refreshToken.getRefreshToken()));
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokensResponse> refresh(@RequestHeader("Authorization") String token){
+
+        return ResponseEntity.status(HttpStatus.OK).body(authService.refresh(token));
     }
 
 }
