@@ -39,6 +39,6 @@ public class CandidateDomain implements UserDetails {
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 }

@@ -1,7 +1,9 @@
 package com.matchskills.user.service.controllers;
 
 import com.matchskills.user.service.dtos.auth.CandidateAuthResponse;
+import com.matchskills.user.service.dtos.auth.CandidateLoginRequest;
 import com.matchskills.user.service.dtos.auth.CompanyAuthResponse;
+import com.matchskills.user.service.dtos.auth.CompanyLoginRequest;
 import com.matchskills.user.service.dtos.candidate.CreateCandidateRequest;
 import com.matchskills.user.service.dtos.company.CreateCompanyRequest;
 import com.matchskills.user.service.services.AuthService;
@@ -31,6 +33,20 @@ public class AuthController {
     public ResponseEntity<CompanyAuthResponse> registerCompany(@Valid @RequestBody CreateCompanyRequest createCompanyRequest) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerCompany(createCompanyRequest));
+
+    }
+
+    @PostMapping("/login/candidate")
+    public  ResponseEntity<CandidateAuthResponse> loginCandidate(@Valid @RequestBody CandidateLoginRequest candidateLoginRequest) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(authService.loginCandidate(candidateLoginRequest));
+
+    }
+
+    @PostMapping("/login/company")
+    public  ResponseEntity<CompanyAuthResponse> loginCompany(@Valid @RequestBody CompanyLoginRequest companyLoginRequest) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(authService.loginCompany(companyLoginRequest));
 
     }
 

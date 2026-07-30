@@ -37,8 +37,8 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(HttpMethod.POST,"/candidate").permitAll()
                         .requestMatchers(HttpMethod.POST,"/company").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/register/company").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/register/candidate").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/register/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/login/**").permitAll()
                         .requestMatchers("/test/**").authenticated()
                         .anyRequest().authenticated()
                 )
