@@ -13,7 +13,7 @@ public class ServerController {
 
     @GetMapping
     public ResponseEntity<Void> health() {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("test/company")
